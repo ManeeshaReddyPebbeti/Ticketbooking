@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: Manu@2018
+    url: jdbc:mysql://localhost:3306/ticketbooking
+    username: root
+  application:
+   name: ticketbooking-api
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+      
+
+springdoc:
+  swagger-ui:
+     path: swagger-ui.html
+#    path: swagger-ui.html
