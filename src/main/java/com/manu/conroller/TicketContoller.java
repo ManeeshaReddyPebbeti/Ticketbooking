@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.manu.bonding.PasengerDto;
+
 import com.manu.bonding.Ticket;
+import com.manu.dto.PasengerDto;
+import com.manu.dto.TrasactionRequest;
+import com.manu.dto.TrasactionResponse;
 import com.manu.servie.TicketService;
 
 @RestController
@@ -23,9 +26,9 @@ public class TicketContoller {
 	@Autowired
 	private TicketService tser;
 	@PostMapping("/booking")
-	public ResponseEntity<String> bookingTicket(PasengerDto pdto){
-		String bokTicket = tser.bokTicket(pdto);
-		return new ResponseEntity<>(bokTicket,HttpStatus.CREATED);
+	public TrasactionResponse  bookingTicket(@RequestBody TrasactionRequest pdto){
+		TrasactionResponse bokTicket = tser.bokTicket(pdto);
+		return bokTicket;
 		
 	}
 	@GetMapping("get/{id}")
@@ -37,31 +40,31 @@ public class TicketContoller {
 	}
 	@GetMapping("/all")
 	public ResponseEntity<List<Ticket>> getAlltickets(@RequestParam(name="length" ,required = false) Long length){
-		List<Ticket> allTiket = tser.getAllTiket(length).stream().limit(length).collect(Collectors.toList());
+		List<Ticket> allTiket = tser.getAllTiket(length);
 		
 		return new ResponseEntity<>(allTiket,HttpStatus.OK);
 		
 	}
-	
-	@PostMapping("/update/{id}")
-	public ResponseEntity<Ticket>updateTicket(@RequestBody PasengerDto p ,@PathVariable Long id){
-		Ticket updateTicket = tser.updateTicket(p, id);
-		
-		return new ResponseEntity<>(updateTicket,HttpStatus.ACCEPTED);
-		
-	}
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> cancelTicket(@PathVariable Long id){
-		
-		String msg="";
-		Boolean cancelTicket = tser.cancelTicket(id);
-		if(cancelTicket) {
-			msg="your ticket is canceld";
-		}else {
-			msg="your ticket can't be canceld";
-		}
-		return new ResponseEntity<>(msg,HttpStatus.OK);
-		
-	}
-	
+//	
+//	@PostMapping("/update/{id}")
+//	public ResponseEntity<Ticket>updateTicket(@RequestBody PasengerDto p ,@PathVariable Long id){
+//		Ticket updateTicket = tser.updateTicket(p, id);
+//		
+//		return new ResponseEntity<>(updateTicket,HttpStatus.ACCEPTED);
+//		
+//	}
+//	@DeleteMapping("/delete/{id}")
+//	public ResponseEntity<String> cancelTicket(@PathVariable Long id){
+//		
+//		String msg="";
+//		Boolean cancelTicket = tser.cancelTicket(id);
+//		if(cancelTicket) {
+//			msg="your ticket is canceld";
+//		}else {
+//			msg="your ticket can't be canceld";
+//		}
+//		return new ResponseEntity<>(msg,HttpStatus.OK);
+//		
+//	}
+//	
 }

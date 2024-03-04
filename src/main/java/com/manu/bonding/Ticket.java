@@ -35,57 +35,19 @@ public class Ticket {
 	 private String routefrom;
 	 private String routeto;
 	 private String gender;
-	  private String emailid;
-	     private String password;
+     private Double ticketprice;
+     private Integer passid;
+   
 		@CreationTimestamp
 	    @JsonFormat(pattern = "yyyy-MM-dd")
 	    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	    private LocalDate journeyDate;
-	@CreationTimestamp
-	 @JsonFormat(pattern = "HH:mm")
-	 @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-	    private LocalTime arrivaltime;
-	@CreationTimestamp
-	
-	 @JsonFormat(pattern = "HH:mm:ss")
-	
-	    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-	    private LocalTime departuretime ;
-	
-	
-	public void addTwoHoursToAraivelTime() {
-       if (arrivaltime != null) {
-       	this.arrivaltime = arrivaltime.plusHours(4);
-       }
-   }
-	public void addTwoHoursToDepartureTime() {
-       if (departuretime != null) {
-           this.departuretime = departuretime.plusHours(2);
-       }
-   }
 	 
 	@UpdateTimestamp
 	@Column( insertable = false)
 	private LocalDateTime updatedDate;
 	   private Integer seats;
 
-	   @Transient
-	   private String customIdentifier;
-	   public String getCustomIdentifier() {
-	        return "ASR" + ticketid;
-	   }
-	public Ticket( String pasname, Integer age, Long passcontactno, String routefrom, String routeto,
-			String gender) {
-		super();
-		
-		this.pasname = pasname;
-		this.age = age;
-		this.passcontactno = passcontactno;
-		this.routefrom = routefrom;
-		this.routeto = routeto;
-		this.gender = gender;
-
-	}
-	 
+ 
 	
 }
